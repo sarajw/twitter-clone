@@ -14,11 +14,15 @@ export default function Home({ tweets }) {
   const router = useRouter()
 
   if (loading) {
-    return null
+    return <p>Loading...</p>
   }
 
   if (!session) {
     router.push('/')
+  }
+  
+  if (session && !session.user.name) {
+    router.push('/setup')
   }
 
   return (

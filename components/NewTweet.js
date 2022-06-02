@@ -28,7 +28,7 @@ export default function NewTweet() {
           },
           method: 'POST',
         })
-        
+
         router.reload(window.location.pathname)
       }}
     >
@@ -48,7 +48,7 @@ export default function NewTweet() {
       <div className='flex'>
         <div className='flex-1 mb-5'>
           <button className='border float-right px-8 py-2 mt-0 mr-2 font-bold rounded-full'>
-            Tweet
+            Cheep
           </button>
         </div>
       </div>
