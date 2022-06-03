@@ -35,7 +35,7 @@ export default function NewTweet() {
       <div className='flex'>
         <div className='flex-1 px-1 pt-2 mt-2 mx-1'>
           <textarea
-            className='border p-4 w-full text-lg font-medium bg-transparent outline-none color-primary rounded-md'
+            className='border border-teal-600/50 bg-teal-600/25 p-4 w-full text-lg font-medium outline-none rounded-md'
             rows={2}
             cols={50}
             placeholder="What's happening?"
@@ -47,7 +47,7 @@ export default function NewTweet() {
 
       <div className='flex'>
         <div className='flex-1 mb-5'>
-          <button className='border float-right px-8 py-2 mt-0 mr-2 font-bold rounded-full'>
+          <button className='border border-teal-600 bg-teal-600/75 hover:bg-teal-600 hover:text-white float-right px-8 py-2 mt-0 mr-2 font-bold rounded-full'>
             Cheep
           </button>
         </div>

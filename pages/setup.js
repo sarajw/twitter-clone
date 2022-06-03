@@ -7,7 +7,7 @@ export default function Setup() {
   const { data: session, status } = useSession()
   const loading = status === 'loading'
   const [name, setName] = useState('')
-  const [nameExists, setNameExists] = useState('')
+  const [nameExists, setNameExists] = useState(false)
   if (!session || !session.user) return null
 	if (loading) return <p>Loading...</p>
 

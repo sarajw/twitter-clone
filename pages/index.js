@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter()
 
   if (status === 'loading') {
-    return null
+    return <p>Loading...</p>
   }
 
   if (session) {
