@@ -10,6 +10,9 @@ export default async function handler(req, res) {
       where: {
         name: req.body.name,
       },
+      select: {
+        name: true,
+      },
     })
 console.log(userExists)
     if(userExists.length){

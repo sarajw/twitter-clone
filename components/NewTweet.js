@@ -32,26 +32,20 @@ export default function NewTweet() {
         router.reload(window.location.pathname)
       }}
     >
-      <div className='flex'>
-        <div className='flex-1 px-1 pt-2 mt-2 mx-1'>
+      <div className='flex flex-col mx-2 my-3 gap-2'>
           <textarea
-            className='border border-gray-600/50 bg-gray-600/25 p-4 w-full text-lg font-medium outline-none rounded-md'
+            className='border border-gray-600/50 bg-gray-600/25 p-4 w-full text-lg font-medium rounded-md'
             rows={2}
             cols={50}
             placeholder="What's happening?"
             name='content'
             onChange={(e) => setContent(e.target.value)}
           />
-        </div>
-      </div>
 
-      <div className='flex'>
-        <div className='flex-1 mb-5'>
-          <button className='border border-teal-600 bg-teal-600/75 hover:bg-teal-600 text-white float-right px-8 py-2 mt-0 mr-2 font-bold rounded-full'>
+          <button className='self-end border border-teal-600 bg-teal-600/75 hover:bg-teal-600 text-white float-right px-8 py-2 mt-0 mr-2 font-bold rounded-full'>
             Cheep
           </button>
-        </div>
-      </div>
+          </div>
     </form>
   )
 }
