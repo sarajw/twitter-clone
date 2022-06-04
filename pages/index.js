@@ -1,6 +1,7 @@
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
+
+import Header from 'components/Header'
 
 export default function Home() {
   const { data: session, status } = useSession()
@@ -15,8 +16,6 @@ export default function Home() {
   }
 
   return (
-      <Link href="/api/auth/signin">
-        <a>login</a>
-      </Link>
+    <Header />
   )
 }

@@ -1,9 +1,15 @@
+import Header from 'components/Header'
 import Tweet from 'components/Tweet'
 import { getTweet } from 'lib/data.js'
 import prisma from 'lib/prisma'
 
 export default function SingleTweet({ tweet }) {
-  return <Tweet tweet={tweet} />
+  return (
+    <>
+      <Header />
+      <Tweet tweet={tweet} />
+    </>
+  )
 }
 
 export async function getServerSideProps({ params }) {
