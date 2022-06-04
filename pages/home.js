@@ -9,7 +9,9 @@ import Tweets from 'components/Tweets'
 
 import { signOut } from "next-auth/react"
 import Link from 'next/link'
+
 import Image from 'next/image'
+import Cheeper from "assets/cheeper.png"
 
 export default function Home({ tweets }) {
   const { data: session, status } = useSession()
@@ -34,7 +36,7 @@ export default function Home({ tweets }) {
         <div className="flex items-center gap-2">
           <Image
                 className='w-64 h-64 dark:invert'
-                src="/../public/cheeper.png"
+                src={Cheeper}
                 alt="Cheeper logo"
                 width='32'
                 height='32'

@@ -1,18 +1,19 @@
 import Image from "next/image"
 import Link from 'next/link'
 import timeago from "lib/timeago"
+import avatar from "assets/defaultAvatar.png"
 
 export default function Tweet({ tweet }) {
   return (
     <div className="flex m-5">
 
-      <div className=" mr-3 shrink-0 drop-shadow-md hover:drop-shadow-sm hover:translate-x-[0.5px] hover:translate-y-[0.5px] ease-in-out duration-200">
+      <div className="mr-3 shrink-0 drop-shadow-md hover:drop-shadow-sm hover:translate-x-[0.5px] hover:translate-y-[0.5px] ease-in-out duration-200">
         <Link href={`/${tweet.author.name}`}>
           <a>
             {!tweet.author.image && (
               <Image
                 className='w-100 h-100 rounded-full'
-                src="/../public/defaultAvatar.png"
+                src={avatar}
                 alt={tweet.author.name}
                 width='50'
                 height='50'
