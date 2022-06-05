@@ -34,7 +34,7 @@ export default function NewTweet() {
     >
       <div className='flex flex-col mx-2 my-3 gap-2'>
           <textarea
-            className='border border-gray-600/50 bg-gray-600/25 p-4 w-full text-lg font-medium rounded-md'
+            className='border border-gray-600/50 bg-gray-600/25 p-4 w-full text-lg font-medium rounded-md placeholder:semibold'
             rows={2}
             cols={50}
             placeholder="What's happening?"
@@ -42,7 +42,7 @@ export default function NewTweet() {
             onChange={(e) => setContent(e.target.value)}
           />
 
-          <button className='self-end border border-teal-600 bg-teal-600/75 hover:bg-teal-600 text-white float-right px-8 py-2 mt-0 mr-2 font-bold rounded-full'>
+          <button className='self-end border border-teal-600 bg-teal-600/75 hover:bg-teal-600 text-white float-right px-8 py-2 mt-0 mr-2 font-semibold rounded-full'>
             Cheep
           </button>
           </div>

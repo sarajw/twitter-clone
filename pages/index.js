@@ -5,9 +5,13 @@ import Header from 'components/Header'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import Tweets from 'components/Tweets'
+import prisma from 'lib/prisma'
+import { getTweets } from 'lib/data.js'
+
 import Cheeper from 'assets/cheeper.png'
 
-export default function Home() {
+export default function Welcome({ tweets }) {
   const { data: session, status } = useSession()
   const router = useRouter()
 
@@ -22,23 +26,44 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="m-5 min-h-[75vh] flex flex-col items-center justify-center gap-5">
+      <div className="mx-5 my-20 flex flex-col items-center justify-center gap-8">
         <Image
-              className='w-720 h-720 dark:invert aspect-square shrink-0'
+              className='w-288 h-360 dark:invert aspect-square shrink-0 opacity-80'
               src={Cheeper}
               alt="Cheeper logo"
-              width='360'
-              height='360'
+              width='144'
+              height='180'
         />
-        <h1 className="text-3xl">Welcome to Cheeper</h1>
-        <p>
-          <Link href="/home">
-            <a className="hover:underline">
-              Click here to enter demo (no sign in)
-            </a>
-          </Link>
-        </p>
+        <h1 className="mb-5 text-center text-3xl">Welcome to Cheeper!</h1>
+        
+        <div className="my-5">
+          <h2 className='text-center text-xl'>Latest Cheeps:</h2>
+          <Tweets tweets={tweets} />
+        </div>
+        <h2 className='text-xl'>Join the conversation!</h2>
+        <Link href='/api/auth/signin'>
+          <a className='border px-8 py-2 font-semibold rounded-full color-accent-contrast bg-color-accent hover:bg-color-accent-hover-darker'>
+            login
+          </a>
+        </Link>
+        <Link href="/home">
+          <a className="hover:underline">
+            Enter demo (no sign in)
+          </a>
+        </Link>
       </div>
     </>
   )
+}
+
+export async function getServerSideProps() {
+  const take = 3
+  let tweets = await getTweets(prisma, take)
+  tweets = JSON.parse(JSON.stringify(tweets))
+
+  return {
+    props: {
+      tweets,
+    },
+  }
 }
