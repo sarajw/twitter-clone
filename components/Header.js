@@ -7,7 +7,13 @@ import Image from 'next/image'
 import Cheeper from "assets/cheeper.png"
 
 export default function NewTweet() {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+  let loading = true;
+
+  if (status !== 'loading') {
+    loading = false;
+  }
+
   return (
     <header className="flex justify-between items-center my-3 mx-4">
       <Link href="/home">
@@ -25,14 +31,16 @@ export default function NewTweet() {
         </a>
       </Link>
 
-    {session && <button onClick={() => signOut()}>Sign out</button>}
-    {!session &&
-      <Link href="/api/auth/signin">
-        <a>
-          <button>Sign in</button>
-        </a>
-      </Link>
-    }
+      {loading && <p className="text-sm opacity-75">Loading...</p>}
+
+      {session && <button onClick={() => signOut()}>Sign out</button>}
+      {!session &&
+        <Link href="/api/auth/signin">
+          <a>
+            <button>Sign in</button>
+          </a>
+        </Link>
+      }
     </header>
   )
 }

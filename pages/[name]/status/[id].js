@@ -1,44 +1,25 @@
 import Header from 'components/Header'
 import Tweet from 'components/Tweet'
-import { getTweet } from 'lib/data.js'
-import prisma from 'lib/prisma'
-import { useSession } from 'next-auth/react'
+import Tweets from 'components/Tweets'
+import NewReply from 'components/NewReply'
+
 import { useRouter } from 'next/router'
 
-export default function SingleTweet({ tweet }) {
-  const { data: session, status } = useSession()
+import { getTweet, getReplies } from 'lib/data.js'
+import prisma from 'lib/prisma'
+
+export default function SingleTweet({ tweet, replies }) {
   const router = useRouter()
 
+  if (typeof window !== 'undefined' && tweet.parent) {
+    router.push(`/${tweet.author.name}/status/${tweet.parent}`)
+  }
   return (
     <>
       <Header />
-      <Tweet tweet={tweet} />
-
-      {session && session.user.email === tweet.author.email && (
-          <button
-            className='block mx-auto'
-            onClick={async () => {
-              const res = await fetch('/api/tweet', {
-                body: JSON.stringify({
-                  id: tweet.id,
-                }),
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                method: 'DELETE',
-              })
-
-              if (res.status === 401) {
-                alert('Unauthorized')
-              }
-              if (res.status === 200) {
-                router.push('/home')
-              }
-            }}
-          >
-            delete
-          </button>
-      )}
+      <Tweet tweet={tweet} />     
+      <NewReply tweet={tweet} />
+      <Tweets tweets={replies} nolink={true} />
     </>
   )
 }
@@ -47,9 +28,13 @@ export async function getServerSideProps({ params }) {
 	let tweet = await getTweet(params.id, prisma)
   tweet = JSON.parse(JSON.stringify(tweet))
 
+	let replies = await getReplies(params.id, prisma)
+  replies = JSON.parse(JSON.stringify(replies))
+
   return {
     props: {
       tweet,
+      replies,
     },
   }
 }

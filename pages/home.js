@@ -14,7 +14,7 @@ export default function Home({ tweets }) {
   const router = useRouter()
 
   if (loading) {
-    return <p>Loading...</p>
+    return <Header />
   }
 
   /* if (!session) {
@@ -35,7 +35,7 @@ export default function Home({ tweets }) {
 }
 
 export async function getServerSideProps() {
-	let tweets = await getTweets(prisma)
+	let tweets = await getTweets(prisma, 10)
   tweets = JSON.parse(JSON.stringify(tweets))
 
   return {

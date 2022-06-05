@@ -34,7 +34,7 @@ export default function NewTweet() {
     >
       <div className='flex flex-col mx-2 my-3 gap-2'>
           <textarea
-            className='border border-gray-600/50 bg-gray-600/25 p-4 w-full text-lg font-medium rounded-md placeholder:semibold'
+            className='border border-gray-600/40 bg-gray-600/10 p-4 w-full text-lg rounded-md placeholder:light'
             rows={2}
             cols={50}
             placeholder="What's happening?"

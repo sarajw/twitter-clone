@@ -3,7 +3,13 @@ import Link from 'next/link'
 import timeago from "lib/timeago"
 import avatar from "assets/defaultAvatar.png"
 
-export default function Tweet({ tweet }) {
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+
+export default function Tweet({ tweet, nolink }) {
+  const { data: session } = useSession()
+  const router = useRouter()
+
   return (
     <div className="flex m-5">
 
@@ -39,11 +45,42 @@ export default function Tweet({ tweet }) {
             </a>
           </Link>
           ·
-          <Link href={`/${tweet.author.name}/status/${tweet.id}`}>
-            <a className='hover:underline text-sm opacity-75 ml-1'>
-              {timeago.format(new Date(tweet.createdAt), 'twitter-now')}
-            </a>
-          </Link>
+          {nolink ? (
+            <span className='text-sm opacity-75 mx-1'>{timeago.format(new Date(tweet.createdAt), 'twitter-now')}</span>
+          ) : (
+            <Link href={`/${tweet.author.name}/status/${tweet.id}`}>
+              <a className='hover:underline text-sm opacity-75 mx-1'>
+                {timeago.format(new Date(tweet.createdAt), 'twitter-now')}
+              </a>
+            </Link>
+          )}
+          {session && session.user.email === tweet.author.email && (
+            <>·
+            <button
+              className='ml-1 hover:underline text-sm opacity-75'
+              onClick={async () => {
+                const res = await fetch('/api/tweet', {
+                  body: JSON.stringify({
+                    id: tweet.id,
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  method: 'DELETE',
+                })
+
+                if (res.status === 401) {
+                  alert('Unauthorized')
+                }
+                if (res.status === 200) {
+                  router.push('/home')
+                }
+              }}
+            >
+              delete cheep
+            </button>
+            </>
+          )}
         </p>
         <p>{tweet.content}</p>
       </div>
