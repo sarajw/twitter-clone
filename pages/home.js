@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
+import { useState } from 'react'
 
 import prisma from 'lib/prisma'
 import { getTweets } from 'lib/data.js'
@@ -7,8 +8,10 @@ import { getTweets } from 'lib/data.js'
 import Header from 'components/Header'
 import NewTweet from 'components/NewTweet'
 import Tweets from 'components/Tweets'
+import LoadMore from 'components/LoadMore'
 
-export default function Home({ tweets }) {
+export default function Home({ initialTweets }) {
+  const [tweets, setTweets] = useState(initialTweets)
   const { data: session, status } = useSession()
   const loading = status === 'loading'
   const router = useRouter()
@@ -28,8 +31,9 @@ export default function Home({ tweets }) {
   return (
     <>
       <Header />
-      <NewTweet />
+      <NewTweet tweets={tweets} setTweets={setTweets} />
       <Tweets tweets={ tweets } />
+      <LoadMore tweets={tweets} setTweets={setTweets} />
     </>
   )
 }
@@ -40,7 +44,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      tweets,
+      initialTweets: tweets,
     },
   }
 }
