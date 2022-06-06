@@ -15,7 +15,7 @@ export default function NewTweet() {
   }
 
   return (
-    <header className="flex justify-between items-center my-3 mx-4">
+    <header className="flex justify-between items-center m-[5vmin]">
       <Link href="/home">
         <a>
           <div className="flex items-center gap-2">
@@ -33,11 +33,11 @@ export default function NewTweet() {
 
       {loading && <p className="text-sm opacity-75">Loading...</p>}
 
-      {session && <button onClick={() => signOut()}>Sign out</button>}
+      {session && <button className="button" onClick={() => signOut()}>Sign&nbsp;out</button>}
       {!session &&
         <Link href="/api/auth/signin">
           <a>
-            <button>Sign in</button>
+            <button className="button">Sign&nbsp;in</button>
           </a>
         </Link>
       }

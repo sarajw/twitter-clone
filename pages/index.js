@@ -26,7 +26,7 @@ export default function Welcome({ tweets }) {
   return (
     <>
       <Header />
-      <div className="mx-5 my-20 flex flex-col items-center justify-center gap-8">
+      <main className="mx-5 my-20 flex flex-col items-center justify-center gap-8">
         <Image
               className='w-288 h-360 dark:invert aspect-square shrink-0 opacity-80'
               src={Cheeper}
@@ -42,8 +42,8 @@ export default function Welcome({ tweets }) {
         </div>
         <h2 className='text-xl'>Join the conversation!</h2>
         <Link href='/api/auth/signin'>
-          <a className='border px-8 py-2 font-semibold rounded-full color-accent-contrast bg-color-accent hover:bg-color-accent-hover-darker'>
-            login
+          <a className='button'>
+            Sign in
           </a>
         </Link>
         <Link href="/home">
@@ -51,7 +51,7 @@ export default function Welcome({ tweets }) {
             Enter demo (no sign in)
           </a>
         </Link>
-      </div>
+      </main>
     </>
   )
 }

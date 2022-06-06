@@ -17,8 +17,10 @@ export default function SingleTweet({ tweet, replies }) {
   return (
     <>
       <Header />
-      <Tweet tweet={tweet} />     
-      <NewReply tweet={tweet} />
+      <div className="m-[5vmin]">
+        <Tweet tweet={tweet} />     
+        <NewReply tweet={tweet} />
+      </div>
       <Tweets tweets={replies} nolink={true} />
     </>
   )

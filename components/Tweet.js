@@ -11,7 +11,7 @@ export default function Tweet({ tweet, nolink }) {
   const router = useRouter()
 
   return (
-    <div className="flex m-5">
+    <div className="flex my-5">
 
       <div className="mr-3 shrink-0 drop-shadow-md hover:drop-shadow-sm hover:translate-x-[0.5px] hover:translate-y-[0.5px] ease-in-out duration-200">
         <Link href={`/${tweet.author.name}`}>
